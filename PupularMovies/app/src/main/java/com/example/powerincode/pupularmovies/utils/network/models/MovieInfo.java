@@ -1,5 +1,11 @@
 package com.example.powerincode.pupularmovies.utils.network.models;
 
+import android.util.Log;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 /**
@@ -8,22 +14,59 @@ import java.util.ArrayList;
  */
 
 public class MovieInfo extends BaseModel {
-    public Integer id;
+    private final String mClassName = MovieInfo.class.getSimpleName();
+
+    public long id;
     public String title;
-    public Boolean video;
-    public Integer voteCount;
-    public Double voteAverage;
-    public Double popularity;
+    public boolean video;
+    public long voteCount;
+    public double voteAverage;
+    public double popularity;
     public String posterPath;
     public String originalLanguage;
     public String originalTitle;
-    public ArrayList<Integer> genreIds = new ArrayList<>();
+    public ArrayList<Integer> genreIds;
     public String backdropPath;
-    public Boolean adult;
+    public boolean adult;
     public String overview;
     public String releaseDate;
 
+    MovieInfo() {
+        super();
+    }
+
+    MovieInfo(String json) throws JSONException {
+        super(json);
+    }
+
     @Override
     public void parse(String json) {
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+
+            id = jsonObject.getLong("id");
+            title = jsonObject.getString("title");
+            video = jsonObject.getBoolean("video");
+            voteCount = jsonObject.getLong("vote_count");
+            voteAverage = jsonObject.getLong("vote_average");
+            popularity = jsonObject.getDouble("popularity");
+            posterPath = jsonObject.getString("poster_path");
+            originalLanguage = jsonObject.getString("original_language");
+            originalTitle = jsonObject.getString("original_title");
+            backdropPath = jsonObject.getString("backdrop_path");
+            adult = jsonObject.getBoolean("adult");
+            overview = jsonObject.getString("overview");
+            releaseDate = jsonObject.getString("release_date");
+            genreIds = new ArrayList<>();
+
+            JSONArray genreIdsJsonArray = jsonObject.getJSONArray("genre_ids");
+            for (int i = 0; i < genreIdsJsonArray.length(); i++) {
+                this.genreIds.add(genreIdsJsonArray.getInt(i));
+            }
+
+        } catch (JSONException e) {
+            Log.e(getClassName(), e.getMessage());
+        }
+
     }
 }

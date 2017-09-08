@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.powerincode.pupularmovies.R;
+import com.example.powerincode.pupularmovies.utils.network.models.DiscoverMovie;
 import com.example.powerincode.pupularmovies.utils.network.models.MovieInfo;
 import com.example.powerincode.pupularmovies.utils.network.services.Actions.ActionItem;
 import com.example.powerincode.pupularmovies.utils.network.services.DiscoverService;
@@ -21,9 +22,9 @@ public class HomeActivity extends AppCompatActivity {
 
         test = (TextView) findViewById(R.id.test);
 
-        DiscoverService.shared.getPopularMovies(new ActionItem<MovieInfo>() {
+        DiscoverService.shared.getPopularMovies(new ActionItem<DiscoverMovie>() {
             @Override
-            public void complete(String response, MovieInfo result) {
+            public void complete(String response, DiscoverMovie result) {
                 super.complete(response, result);
                 test.setText(response);
             }
