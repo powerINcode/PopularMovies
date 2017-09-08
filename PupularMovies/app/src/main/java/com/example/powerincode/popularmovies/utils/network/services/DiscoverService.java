@@ -1,9 +1,9 @@
-package com.example.powerincode.pupularmovies.utils.network.services;
+package com.example.powerincode.popularmovies.utils.network.services;
 
-import com.example.powerincode.pupularmovies.utils.network.NetworkWorker;
-import com.example.powerincode.pupularmovies.utils.network.models.DiscoverMovie;
-import com.example.powerincode.pupularmovies.utils.network.routes.RouterDiscover;
-import com.example.powerincode.pupularmovies.utils.network.services.Actions.ActionItem;
+import com.example.powerincode.popularmovies.utils.network.NetworkWorker;
+import com.example.powerincode.popularmovies.utils.network.models.DiscoverMovie;
+import com.example.powerincode.popularmovies.utils.network.routes.RouterDiscover;
+import com.example.powerincode.popularmovies.utils.network.services.Actions.ActionItem;
 
 /**
  * Created by powerman23rus on 08.09.17.

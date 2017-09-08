@@ -1,4 +1,4 @@
-package com.example.powerincode.pupularmovies;
+package com.example.powerincode.popularmovies;
 
 import org.junit.Test;
 

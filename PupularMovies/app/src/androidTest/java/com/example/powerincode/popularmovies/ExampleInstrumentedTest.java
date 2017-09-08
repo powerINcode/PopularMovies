@@ -1,4 +1,4 @@
-package com.example.powerincode.pupularmovies;
+package com.example.powerincode.popularmovies;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,8 +1,8 @@
-package com.example.powerincode.pupularmovies.utils.network.routes;
+package com.example.powerincode.popularmovies.utils.network.routes;
 
 import android.net.Uri;
 
-import com.example.powerincode.pupularmovies.utils.Configuration;
+import com.example.powerincode.popularmovies.utils.Configuration;
 
 /**
  * Created by powerman23rus on 08.09.17.

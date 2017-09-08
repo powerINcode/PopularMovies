@@ -1,4 +1,4 @@
-package com.example.powerincode.pupularmovies.utils.network.routes;
+package com.example.powerincode.popularmovies.utils.network.routes;
 
 import android.net.Uri;
 

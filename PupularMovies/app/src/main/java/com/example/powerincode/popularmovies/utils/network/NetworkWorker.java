@@ -1,11 +1,11 @@
-package com.example.powerincode.pupularmovies.utils.network;
+package com.example.powerincode.popularmovies.utils.network;
 
 import android.net.Uri;
 import android.os.AsyncTask;
 
-import com.example.powerincode.pupularmovies.utils.network.models.BaseModel;
-import com.example.powerincode.pupularmovies.utils.network.services.Actions.Action;
-import com.example.powerincode.pupularmovies.utils.network.services.Actions.ActionItem;
+import com.example.powerincode.popularmovies.utils.network.models.BaseModel;
+import com.example.powerincode.popularmovies.utils.network.services.Actions.Action;
+import com.example.powerincode.popularmovies.utils.network.services.Actions.ActionItem;
 
 import org.json.JSONObject;
 import org.json.JSONTokener;

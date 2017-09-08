@@ -1,4 +1,4 @@
-package com.example.powerincode.pupularmovies.utils.network.models;
+package com.example.powerincode.popularmovies.utils.network.models;
 
 import android.util.Log;
 
@@ -50,7 +50,7 @@ public class MovieInfo extends BaseModel {
             voteCount = jsonObject.getLong("vote_count");
             voteAverage = jsonObject.getLong("vote_average");
             popularity = jsonObject.getDouble("popularity");
-            posterPath = jsonObject.getString("poster_path");
+            posterPath = jsonObject.getString("poster_path").replace("/","");
             originalLanguage = jsonObject.getString("original_language");
             originalTitle = jsonObject.getString("original_title");
             backdropPath = jsonObject.getString("backdrop_path");

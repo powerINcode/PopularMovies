@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">PupularMovies</string>
+    <string name="app_name">PopularMovies</string>
+    <string name="error_service_unavailable">Sorry, but the service is not available. Try again later</string>
+    <string name="movie_poster_content_description">Movie poster</string>
 </resources>

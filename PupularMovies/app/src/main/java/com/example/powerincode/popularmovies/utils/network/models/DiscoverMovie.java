@@ -1,6 +1,4 @@
-package com.example.powerincode.pupularmovies.utils.network.models;
-
-import android.util.Log;
+package com.example.powerincode.popularmovies.utils.network.models;
 
 import org.json.JSONArray;
 import org.json.JSONException;

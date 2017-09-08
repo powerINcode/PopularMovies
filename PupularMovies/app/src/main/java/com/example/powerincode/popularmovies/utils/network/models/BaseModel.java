@@ -1,7 +1,6 @@
-package com.example.powerincode.pupularmovies.utils.network.models;
+package com.example.powerincode.popularmovies.utils.network.models;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  * Created by powerman23rus on 07.09.17.
