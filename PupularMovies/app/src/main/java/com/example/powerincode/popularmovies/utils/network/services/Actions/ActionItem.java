@@ -7,6 +7,6 @@ package com.example.powerincode.popularmovies.utils.network.services.Actions;
 
 public abstract class ActionItem<T> extends Action<T>{
     public void complete(String response, T result)  {
-        callDone();
+        complete(response);
     }
 }

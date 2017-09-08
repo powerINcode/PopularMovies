@@ -24,4 +24,9 @@ public class DiscoverService {
         new NetworkWorker<>(DiscoverMovie.class, callback)
                 .execute(router.getPopularMovies());
     }
+
+    public void getTopRatedMovies(ActionItem<DiscoverMovie> callback) {
+        new NetworkWorker<>(DiscoverMovie.class, callback)
+                .execute(router.getTopRatedMovies());
+    }
 }

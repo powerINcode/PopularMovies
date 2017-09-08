@@ -19,6 +19,7 @@
         android:layout_gravity="center"
         android:text="@string/error_service_unavailable"
         android:textSize="32sp"
+        android:padding="16dp"
         android:visibility="gone" />
 
     <ProgressBar

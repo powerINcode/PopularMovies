@@ -13,7 +13,7 @@ public class RouterDiscover extends Router {
 
     @Override
     public String getRoute() {
-        return "discover/movie";
+        return "movie";
     }
 
     public Uri getMovies() {
@@ -23,15 +23,19 @@ public class RouterDiscover extends Router {
     public Uri getPopularMovies() {
         return getMovies()
                 .buildUpon()
-                .appendQueryParameter(PARAM.SORT_BY, PARAM_VALUE.POPULARITY)
+                .appendEncodedPath(PATHS.POPULARITY)
                 .build();
     }
 
-    private static class PARAM {
-        static final String SORT_BY = "sot_by";
+    public Uri getTopRatedMovies() {
+        return getMovies()
+                .buildUpon()
+                .appendEncodedPath(PATHS.RATING)
+                .build();
     }
 
-    private static class PARAM_VALUE {
-        static final String POPULARITY = "popularity.desc";
+    private static class PATHS {
+        static final String POPULARITY = "popular";
+        static final String RATING = "top_rated";
     }
 }

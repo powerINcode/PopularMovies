@@ -9,6 +9,6 @@ import java.util.ArrayList;
 
 public abstract class ActionCollection<T> extends Action<T> {
     public void complete(String response, ArrayList<T> results) {
-        callDone();
+        complete(response);
     }
 }

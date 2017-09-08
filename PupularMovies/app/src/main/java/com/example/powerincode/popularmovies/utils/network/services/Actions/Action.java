@@ -14,12 +14,13 @@ public abstract class Action<T> {
     }
     public void complete(String response) {
         callDone();
+        isDoneWasCalled = false;
     }
     public void error(Exception error) {
         callDone();
     }
 
-    void callDone() {
+    private void callDone() {
         if (!isDoneWasCalled) {
             done();
         }

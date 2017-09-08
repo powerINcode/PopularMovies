@@ -50,11 +50,9 @@ public class NetworkWorker<T extends Action<V>, V extends BaseModel> extends Asy
 
             if (scanner.hasNext()) {
                 return scanner.next();
-            } else {
-                throw new Exception("Empty response from server.");
             }
         } catch (Exception e) {
-            callError(e);
+            return null;
         }
 
         return null;
@@ -66,6 +64,7 @@ public class NetworkWorker<T extends Action<V>, V extends BaseModel> extends Asy
         super.onPostExecute(jsonString);
 
         if (jsonString == null) {
+            callError(new Exception("Connection with server is broken."));
             return;
         }
 
