@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">Popular Movies</string>
     <string name="movie_poster_content_description">Movie poster</string>
-    <string name="option_most_popular">Most popular</string>
+    <string name="option_most_popular">Most Popular</string>
     <string name="option_most_rated">Most Rated</string>
     <string name="sort">sort</string>
 
     <!--Errors-->
     <string name="error_type_unsupported">Sorry, but %1$s type is unsupported.</string>
     <string name="error_service_unavailable">Sorry, but the service is not available. Try again later</string>
+    <string name="movie_overview_label">Overview</string>
 </resources>

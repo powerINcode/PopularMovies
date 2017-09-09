@@ -1,5 +1,7 @@
 package com.example.powerincode.popularmovies.utils.network.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -7,13 +9,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Created by powerman23rus on 07.09.17.
  * Enjoy ;)
  */
 
-public class MovieInfo extends BaseModel {
+public class MovieInfo extends BaseModel implements Parcelable {
     private final String mClassName = MovieInfo.class.getSimpleName();
 
     public long id;
@@ -37,6 +41,23 @@ public class MovieInfo extends BaseModel {
 
     MovieInfo(String json) throws JSONException {
         super(json);
+    }
+
+    public MovieInfo(Parcel parcel) {
+        id = parcel.readLong();
+        title = parcel.readString();
+        video = getBooleanRepresentation(parcel.readByte());
+        voteCount = parcel.readLong();
+        voteAverage = parcel.readDouble();
+        popularity = parcel.readDouble();
+        posterPath = parcel.readString();
+        originalLanguage = parcel.readString();
+        originalTitle = parcel.readString();
+        backdropPath = parcel.readString();
+        adult = getBooleanRepresentation(parcel.readByte());
+        overview = parcel.readString();
+        releaseDate = parcel.readString();
+        genreIds = (ArrayList<Integer>) parcel.readSerializable();
     }
 
     @Override
@@ -68,5 +89,50 @@ public class MovieInfo extends BaseModel {
             Log.e(getClassName(), e.getMessage());
         }
 
+    }
+
+    //region Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeLong(id);
+        parcel.writeString(title);
+        parcel.writeByte(getBooleanRepresentation(video));
+        parcel.writeLong(voteCount);
+        parcel.writeDouble(voteAverage);
+        parcel.writeDouble(popularity);
+        parcel.writeString(posterPath);
+        parcel.writeString(originalLanguage);
+        parcel.writeString(originalTitle);
+        parcel.writeString(backdropPath);
+        parcel.writeByte(getBooleanRepresentation(adult));
+        parcel.writeString(overview);
+        parcel.writeString(releaseDate);
+        parcel.writeSerializable(genreIds);
+    }
+
+    public static final Parcelable.Creator<MovieInfo> CREATOR = new Creator<MovieInfo>() {
+        @Override
+        public MovieInfo createFromParcel(Parcel parcel) {
+            return new MovieInfo(parcel);
+        }
+
+        @Override
+        public MovieInfo[] newArray(int i) {
+            return new MovieInfo[i];
+        }
+    };
+    //endregion
+
+    private byte getBooleanRepresentation(boolean value) {
+        return (byte)(video ? 1 : 0);
+    }
+
+    private boolean getBooleanRepresentation(byte value) {
+        return value == 1;
     }
 }

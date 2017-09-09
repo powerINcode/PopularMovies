@@ -1,5 +1,6 @@
 package com.example.powerincode.popularmovies.screens.home;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,11 +13,13 @@ import android.widget.TextView;
 
 import com.example.powerincode.popularmovies.R;
 import com.example.powerincode.popularmovies.screens.home.adapters.MoviesAdapter;
+import com.example.powerincode.popularmovies.screens.movie.DetailActivity;
 import com.example.powerincode.popularmovies.utils.network.models.DiscoverMovie;
+import com.example.powerincode.popularmovies.utils.network.models.MovieInfo;
 import com.example.powerincode.popularmovies.utils.network.services.Actions.ActionItem;
 import com.example.powerincode.popularmovies.utils.network.services.DiscoverService;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements MoviesAdapter.OnMovieClickListener {
     private final int MOST_POPULAR = 0;
     private final int MOST_RATED = 1;
     private int mCurrentSortingType = MOST_POPULAR;
@@ -98,7 +101,7 @@ public class HomeActivity extends AppCompatActivity {
         @Override
         public void complete(String response, DiscoverMovie result) {
             super.complete(response, result);
-            mMovieAdapter = new MoviesAdapter(result);
+            mMovieAdapter = new MoviesAdapter(HomeActivity.this, result);
             mRecyclerView.setAdapter(mMovieAdapter);
         }
 
@@ -114,4 +117,11 @@ public class HomeActivity extends AppCompatActivity {
             setErrorState(error.getMessage());
         }
     };
+
+    @Override
+    public void onClick(MovieInfo movieInfo) {
+        Intent detailActivity = new Intent(this, DetailActivity.class);
+        detailActivity.putExtra(DetailActivity.EXTRA_MOVIE_INFO, movieInfo);
+        startActivity(detailActivity);
+    }
 }
