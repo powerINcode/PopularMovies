@@ -64,6 +64,7 @@ public class NetworkWorker<T extends Action<V>, V extends BaseModel> extends Asy
         super.onPostExecute(jsonString);
 
         if (jsonString == null) {
+            //TODO: Don't wanna pass here context for localizing error message
             callError(new Exception("Connection with server is broken."));
             return;
         }

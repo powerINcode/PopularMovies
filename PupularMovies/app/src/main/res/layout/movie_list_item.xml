@@ -4,10 +4,17 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp">
 
-    <ImageView
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_movie_poster_image"-->
+        <!--android:layout_width="187dp"-->
+        <!--android:layout_height="277dp"-->
+        <!--android:contentDescription="@string/movie_poster_content_description" />-->
+
+    <com.example.powerincode.popularmovies.screens.commonViews.LoadingImageView
         android:id="@+id/iv_movie_poster_image"
         android:layout_width="187dp"
-        android:layout_height="277dp"
-        android:contentDescription="@string/movie_poster_content_description" />
+        android:layout_height="277dp">
+
+    </com.example.powerincode.popularmovies.screens.commonViews.LoadingImageView>
 
 </FrameLayout>

@@ -4,6 +4,8 @@
     <string name="option_most_popular">Most Popular</string>
     <string name="option_most_rated">Most Rated</string>
     <string name="sort">sort</string>
+    <string name="movie_rating">Rating of movie: %1$.1f</string>
+    <string name="movie_release_date">Release date: %1$s</string>
 
     <!--Errors-->
     <string name="error_type_unsupported">Sorry, but %1$s type is unsupported.</string>

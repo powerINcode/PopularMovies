@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.powerincode.popularmovies.R;
+import com.example.powerincode.popularmovies.screens.commonViews.LoadingImageView;
 import com.example.powerincode.popularmovies.utils.network.models.DiscoverMovie;
 import com.example.powerincode.popularmovies.utils.network.models.MovieInfo;
 import com.example.powerincode.popularmovies.utils.network.services.Common;
@@ -66,7 +67,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView mPosterImageView;
+        LoadingImageView mPosterImageView;
         private MovieInfo mMovie;
 
         MovieViewHolder(View itemView) {
@@ -80,9 +81,11 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
             mMovie = movieInfo;
             String posterFullUrl = Common.shared.getPosterPath(mMovie.posterPath, mPosterResolution);
 
-            Picasso.with(itemView.getContext())
-                    .load(posterFullUrl)
-                    .into(mPosterImageView);
+//            Picasso.with(itemView.getContext())
+//                    .load(posterFullUrl)
+//                    .into(mPosterImageView);
+
+            mPosterImageView.load(posterFullUrl);
         }
 
         @Override
