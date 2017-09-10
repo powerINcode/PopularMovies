@@ -1,7 +1,6 @@
 package com.example.powerincode.popularmovies.screens.home;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.powerincode.popularmovies.R;
+import com.example.powerincode.popularmovies.screens.BaseActivity;
 import com.example.powerincode.popularmovies.screens.home.adapters.MoviesAdapter;
 import com.example.powerincode.popularmovies.screens.movie.DetailActivity;
 import com.example.powerincode.popularmovies.utils.network.models.DiscoverMovie;
@@ -19,17 +19,16 @@ import com.example.powerincode.popularmovies.utils.network.models.MovieInfo;
 import com.example.powerincode.popularmovies.utils.network.services.Actions.ActionItem;
 import com.example.powerincode.popularmovies.utils.network.services.DiscoverService;
 
-public class HomeActivity extends AppCompatActivity implements MoviesAdapter.OnMovieClickListener {
-    private final int MOST_POPULAR = 0;
-    private final int MOST_RATED = 1;
-    private int mCurrentSortingType = MOST_POPULAR;
+public class HomeActivity extends BaseActivity implements MoviesAdapter.OnMovieClickListener {
+    private final DiscoverService service = DiscoverService.shared;
+    private final int MOST_POPULAR = 1;
+    private final int MOST_RATED = 2;
+    private int mCurrentSortingType;
 
-    private DiscoverService service = DiscoverService.shared;
-
-    RecyclerView mRecyclerView;
-    MoviesAdapter mMovieAdapter;
-    TextView mErrorMessage;
-    ProgressBar mLoadingIndicator;
+    private RecyclerView mRecyclerView;
+    private MoviesAdapter mMovieAdapter;
+    private TextView mErrorMessage;
+    private ProgressBar mLoadingIndicator;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -61,7 +60,7 @@ public class HomeActivity extends AppCompatActivity implements MoviesAdapter.OnM
         mRecyclerView = (RecyclerView) findViewById(R.id.rc_movies);
         mRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         mRecyclerView.setHasFixedSize(true); //TODO: delete when multipage is added
-        changeSortType(MOST_RATED);
+        changeSortType(MOST_POPULAR);
     }
 
     private void changeSortType(int sortType) {
@@ -90,7 +89,7 @@ public class HomeActivity extends AppCompatActivity implements MoviesAdapter.OnM
         mErrorMessage.setVisibility(View.VISIBLE);
     }
 
-    private ActionItem<DiscoverMovie> mLoadingCallback = new ActionItem<DiscoverMovie>() {
+    private final ActionItem<DiscoverMovie> mLoadingCallback = new ActionItem<DiscoverMovie>() {
         @Override
         public void start() {
             super.start();

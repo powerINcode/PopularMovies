@@ -22,8 +22,8 @@ import java.util.Scanner;
 
 public class NetworkWorker<T extends Action<V>, V extends BaseModel> extends AsyncTask<Uri, Void, String> {
 
-    private Class<V> mModelClass;
-    private T mCallback;
+    private final Class<V> mModelClass;
+    private final T mCallback;
 
     public NetworkWorker(Class<V> modelClass, T cb) {
         mCallback = cb;

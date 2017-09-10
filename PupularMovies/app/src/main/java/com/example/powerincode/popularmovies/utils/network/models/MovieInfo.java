@@ -9,8 +9,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 
 /**
  * Created by powerman23rus on 07.09.17.
@@ -18,8 +16,6 @@ import java.util.Collections;
  */
 
 public class MovieInfo extends BaseModel implements Parcelable {
-    private final String mClassName = MovieInfo.class.getSimpleName();
-
     public long id;
     public String title;
     public boolean video;
@@ -129,7 +125,7 @@ public class MovieInfo extends BaseModel implements Parcelable {
     //endregion
 
     private byte getBooleanRepresentation(boolean value) {
-        return (byte)(video ? 1 : 0);
+        return (byte)(value ? 1 : 0);
     }
 
     private boolean getBooleanRepresentation(byte value) {

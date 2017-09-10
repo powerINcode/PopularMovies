@@ -5,14 +5,12 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.powerincode.popularmovies.R;
 import com.example.powerincode.popularmovies.screens.commonViews.LoadingImageView;
 import com.example.powerincode.popularmovies.utils.network.models.DiscoverMovie;
 import com.example.powerincode.popularmovies.utils.network.models.MovieInfo;
 import com.example.powerincode.popularmovies.utils.network.services.Common;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -23,14 +21,13 @@ import java.util.ArrayList;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
     private final String mPosterResolution = "w185_and_h278_bestv2";
+    private final OnMovieClickListener mOnClickListener;
+    private final int moviesPerPage = 20;
+    private SparseArray<ArrayList<MovieInfo>> mMovies;
 
     public interface OnMovieClickListener {
         void onClick(MovieInfo movieInfo);
     }
-
-    private int moviesPerPage = 20;
-    private SparseArray<ArrayList<MovieInfo>> mMovies;
-    private OnMovieClickListener mOnClickListener;
 
     @Override
     public MovieViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -67,7 +64,7 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     }
 
     class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        LoadingImageView mPosterImageView;
+        private final LoadingImageView mPosterImageView;
         private MovieInfo mMovie;
 
         MovieViewHolder(View itemView) {
@@ -80,10 +77,6 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         void bind(MovieInfo movieInfo) {
             mMovie = movieInfo;
             String posterFullUrl = Common.shared.getPosterPath(mMovie.posterPath, mPosterResolution);
-
-//            Picasso.with(itemView.getContext())
-//                    .load(posterFullUrl)
-//                    .into(mPosterImageView);
 
             mPosterImageView.load(posterFullUrl);
         }

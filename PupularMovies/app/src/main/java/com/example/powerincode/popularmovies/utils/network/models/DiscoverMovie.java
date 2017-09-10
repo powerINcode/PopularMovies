@@ -15,7 +15,7 @@ public class DiscoverMovie extends BaseModel {
     public int page;
     public long totalResults;
     public int totalPages;
-    public ArrayList<MovieInfo> results = new ArrayList<>();
+    final public ArrayList<MovieInfo> results = new ArrayList<>();
 
     DiscoverMovie() {
         super();

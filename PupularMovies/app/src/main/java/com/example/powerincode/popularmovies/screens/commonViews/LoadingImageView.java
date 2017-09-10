@@ -21,13 +21,12 @@ import com.squareup.picasso.Picasso;
  */
 
 public class LoadingImageView extends FrameLayout {
-    ImageView mMainImage;
-    ProgressBar mLoadingIndicator;
-
+    private ImageView mMainImage;
+    private ProgressBar mLoadingIndicator;
     public boolean mIsLoading;
 
-    public ProgressBar getIsLoading() {
-        return mLoadingIndicator;
+    public boolean getIsLoading() {
+        return mIsLoading;
     }
 
     public LoadingImageView(@NonNull Context context) {
@@ -54,6 +53,8 @@ public class LoadingImageView extends FrameLayout {
     }
 
     private void setLoading(boolean isLoading) {
+        mIsLoading = isLoading;
+
         if (isLoading) {
             mMainImage.setVisibility(INVISIBLE);
             mLoadingIndicator.setVisibility(VISIBLE);

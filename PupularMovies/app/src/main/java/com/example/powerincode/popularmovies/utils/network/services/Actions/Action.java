@@ -18,6 +18,7 @@ public abstract class Action<T> {
     }
     public void error(Exception error) {
         callDone();
+        isDoneWasCalled = false;
     }
 
     private void callDone() {
