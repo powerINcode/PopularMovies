@@ -1,14 +1,12 @@
 package com.example.powerincode.popularmovies.utils;
 
 /**
- * Created by powerman23rus on 07.09.17.
+ * Created by powerman23rus on 26.10.17.
  * Enjoy ;)
  */
 
-public final class Configuration {
-    public final static class api {
-        public final static String BASE_URL = "https://api.themoviedb.org/3";
-        public final static String BASE_POSTERS_URL = "http://image.tmdb.org/t/p";
-        public final static String MOVIE_DB_API_KEY = "Insert your API";
-    }
+public class Configuration {
+    public static String API_DOMAIN_URL = "https://api.themoviedb.org/3/";
+    public static String DOMAIN_URL = "http://image.tmdb.org/t/p/";
+    public static String API_KEY = "b391ea8520581a230bf851b2a23312b0";
 }
