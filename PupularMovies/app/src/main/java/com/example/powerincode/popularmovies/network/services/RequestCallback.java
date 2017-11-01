@@ -1,7 +1,5 @@
 package com.example.powerincode.popularmovies.network.services;
 
-import com.example.powerincode.popularmovies.network.models.PagingMovies;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -12,7 +10,6 @@ import retrofit2.Response;
  */
 
 public abstract class RequestCallback<T> implements Callback<T> {
-    public void onStart() {}
     public void onComplete(){}
     public void onSuccess(Response<T> response, T result){
         onComplete();

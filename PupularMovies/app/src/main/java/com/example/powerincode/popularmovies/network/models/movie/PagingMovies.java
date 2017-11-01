@@ -1,7 +1,6 @@
-package com.example.powerincode.popularmovies.network.models;
+package com.example.powerincode.popularmovies.network.models.movie;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by powerman23rus on 26.10.17.

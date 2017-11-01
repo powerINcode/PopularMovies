@@ -1,8 +1,6 @@
 package com.example.powerincode.popularmovies.network.services;
 
-import com.example.powerincode.popularmovies.network.models.GenreList;
-
-import java.util.List;
+import com.example.powerincode.popularmovies.network.models.genre.GenreList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

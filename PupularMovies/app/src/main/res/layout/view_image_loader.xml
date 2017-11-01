@@ -3,12 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
+    <com.example.powerincode.popularmovies.common.views.ImageViewPoster
         android:id="@+id/iv_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:adjustViewBounds="false"
-        android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_round"
         android:visibility="invisible" />
 

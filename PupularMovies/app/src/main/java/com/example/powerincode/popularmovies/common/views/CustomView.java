@@ -1,9 +1,11 @@
 package com.example.powerincode.popularmovies.common.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.AttrRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StyleableRes;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +44,23 @@ public abstract class CustomView extends FrameLayout {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(getLayoutId(), this, true);
         ButterKnife.bind(view);
+
+        if(getStyledAttrs() != null) {
+            TypedArray ta = context.obtainStyledAttributes(attrs, getStyledAttrs());
+
+            try {
+                setAttr(ta);
+            } catch(Exception e) {
+                ta.recycle();
+            }
+        }
+    }
+
+    protected @StyleableRes int[] getStyledAttrs() {
+        return null;
+    }
+
+    protected void setAttr(TypedArray attrs){
     }
 
 }

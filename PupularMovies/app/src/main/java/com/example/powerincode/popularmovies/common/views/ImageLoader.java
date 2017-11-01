@@ -1,6 +1,7 @@
 package com.example.powerincode.popularmovies.common.views;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
@@ -24,12 +25,12 @@ public class ImageLoader extends CustomView {
     }
 
     @BindView(R.id.iv_image)
-    ImageView mImageView;
+    ImageViewPoster mImageView;
 
     @BindView(R.id.pb_image_loader)
     ProgressBar mImageLoader;
 
-    public ImageLoaderEvent imageLoaderEventListener;
+    private ImageLoaderEvent imageLoaderEventListener;
 
 
     @Override
@@ -47,6 +48,10 @@ public class ImageLoader extends CustomView {
 
     public ImageLoader(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+
+    public void setListener(ImageLoaderEvent e) {
+        imageLoaderEventListener = e;
     }
 
     public void initialization(String url) {
@@ -71,6 +76,22 @@ public class ImageLoader extends CustomView {
 
         if (imageLoaderEventListener != null) {
             imageLoaderEventListener.onComplete();
+        }
+    }
+
+    @Override
+    protected int[] getStyledAttrs() {
+        return R.styleable.ImageLoader;
+    }
+
+    @Override
+    protected void setAttr(TypedArray attrs) {
+        int scale = attrs.getInt(R.styleable.ImageLoader_scale, 0);
+
+        if(scale == 1) {
+            mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        } else if(scale == 2) {
+            mImageView.setScaleType(ImageView.ScaleType.MATRIX);
         }
     }
 }

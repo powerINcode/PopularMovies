@@ -1,4 +1,4 @@
-package com.example.powerincode.popularmovies.network.models;
+package com.example.powerincode.popularmovies.network.models.genre;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

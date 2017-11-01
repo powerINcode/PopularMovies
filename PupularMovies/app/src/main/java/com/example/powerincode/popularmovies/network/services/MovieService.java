@@ -1,6 +1,7 @@
 package com.example.powerincode.popularmovies.network.services;
 
-import com.example.powerincode.popularmovies.network.models.PagingMovies;
+import com.example.powerincode.popularmovies.network.models.movie.MoviePlayingList;
+import com.example.powerincode.popularmovies.network.models.movie.PagingMovies;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -14,4 +15,7 @@ import retrofit2.http.Query;
 public interface MovieService {
     @GET("movie/popular")
     Call<PagingMovies> listPopularMovies(@Query("page") Integer page);
+
+    @GET("movie/now_playing")
+    Call<MoviePlayingList> listPlayingMovies(@Query("page") Integer page);
 }

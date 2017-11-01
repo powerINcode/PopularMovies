@@ -1,8 +1,7 @@
 package com.example.powerincode.popularmovies.utils;
 
 import com.example.powerincode.popularmovies.PopularMovieApplication;
-import com.example.powerincode.popularmovies.network.models.Genre;
-import com.example.powerincode.popularmovies.network.models.GenreList;
+import com.example.powerincode.popularmovies.network.models.genre.Genre;
 
 import java.util.List;
 

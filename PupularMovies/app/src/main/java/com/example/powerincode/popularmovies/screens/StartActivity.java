@@ -6,10 +6,8 @@ import android.os.Bundle;
 import com.example.powerincode.popularmovies.PopularMovieApplication;
 import com.example.powerincode.popularmovies.R;
 import com.example.powerincode.popularmovies.network.Networker;
-import com.example.powerincode.popularmovies.network.models.GenreList;
+import com.example.powerincode.popularmovies.network.models.genre.GenreList;
 import com.example.powerincode.popularmovies.network.services.RequestCallback;
-
-import java.util.List;
 
 import retrofit2.Response;
 

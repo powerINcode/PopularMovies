@@ -2,8 +2,7 @@ package com.example.powerincode.popularmovies;
 
 import android.app.Application;
 
-import com.example.powerincode.popularmovies.network.models.Genre;
-import com.example.powerincode.popularmovies.network.models.GenreList;
+import com.example.powerincode.popularmovies.network.models.genre.Genre;
 
 import java.util.List;
 

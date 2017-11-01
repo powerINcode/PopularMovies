@@ -13,6 +13,10 @@ public class UriHelper {
     public static final UriHelper shared = new UriHelper();
 
     public String buildPosterUrl(Context context, String postPath) {
-        return Configuration.DOMAIN_URL + "w" + context.getResources().getInteger(R.integer.poster_size) + postPath;
+        return buildPosterUrl(context, postPath, context.getResources().getInteger(R.integer.poster_size));
+    }
+
+    public String buildPosterUrl(Context context, String postPath, int size) {
+        return Configuration.DOMAIN_URL + "w" + size + postPath;
     }
 }
