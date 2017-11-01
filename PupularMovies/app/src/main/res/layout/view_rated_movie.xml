@@ -17,47 +17,50 @@
         app:layout_constraintVertical_bias="1.0"
         app:scale="top"/>
 
-    <View
+    <FrameLayout
         android:id="@+id/v_movie_description_container"
         android:layout_width="0dp"
         android:layout_height="75dp"
-        android:background="#cf19194c"
+        android:background="@color/colorPrimaryHalf"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/il_rated_movie_poster"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:visibility="invisible"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/tv_movie_name"
-        android:layout_width="wrap_content"
-        android:layout_height="41dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:textColor="@android:color/white"
         android:textSize="30sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/tv_movie_genre"
+        app:layout_constraintEnd_toEndOf="@+id/rtv_rating"
         app:layout_constraintStart_toStartOf="@+id/tv_movie_genre"
-        tools:text="Matrix"
-        android:visibility="invisible"/>
+        tools:text="Matrix" />
 
     <TextView
         android:id="@+id/tv_movie_genre"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
         android:textColor="@android:color/white"
         android:textSize="18sp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/rtv_rating"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:text="Action, Fantasy"
-        android:visibility="invisible"/>
+        tools:text="Action, Fantasy" />
 
     <view
         android:id="@+id/rtv_rating"
         class="com.example.powerincode.popularmovies.common.views.RatingView"
         android:layout_width="150dp"
         android:layout_height="30dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/tv_movie_genre"
-        app:layout_constraintEnd_toEndOf="@+id/v_movie_description_container"
-        android:visibility="invisible"/>
+        app:layout_constraintEnd_toEndOf="@+id/v_movie_description_container" />
 
 </android.support.constraint.ConstraintLayout>

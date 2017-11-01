@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">PopularMovies</string>
+    <string name="most_rated_filter_label">most rated</string>
+    <string name="most_popular_filter_label">popular</string>
+    <string name="favorite_filter_label">favorite</string>
 
 </resources>

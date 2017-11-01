@@ -1,5 +1,6 @@
 package com.example.powerincode.popularmovies.network.models.genre;
 
+import com.example.powerincode.popularmovies.network.models.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -8,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * Enjoy ;)
  */
 
-public class Genre {
+public class Genre extends BaseModel {
     @SerializedName("id")
     @Expose
     public Integer id;

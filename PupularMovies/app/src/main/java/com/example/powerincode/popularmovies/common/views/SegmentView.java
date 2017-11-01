@@ -66,7 +66,7 @@ public class SegmentView extends CustomView implements View.OnTouchListener {
             this.mSegments.add(button);
             mContainer.addView(button);
 
-            button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
+            button.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 1));
             button.setTextAppearance(getContext(), R.style.SegmentButtonStyle);
             button.setText(segment);
 
@@ -94,6 +94,10 @@ public class SegmentView extends CustomView implements View.OnTouchListener {
             Button button = mSegments.get(position);
             button.setPressed(true);
             mSelectedSegment = button;
+
+            if (mActionListener != null) {
+                mActionListener.onSelected(mSegments.indexOf(button));
+            }
         }
     }
 
@@ -104,12 +108,6 @@ public class SegmentView extends CustomView implements View.OnTouchListener {
 
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 setActive(mSegments.indexOf(button));
-
-                if (mActionListener != null) {
-                    mActionListener.onSelected(mSegments.indexOf(button));
-                }
-
-
             }
 
             return true;

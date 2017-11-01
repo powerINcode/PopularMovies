@@ -25,18 +25,27 @@ import butterknife.BindView;
 import retrofit2.Response;
 
 public class MainActivity extends BaseActivity implements SegmentView.SegmentAction {
+    public static final String BUNDLE_NOW_PLAYING_MOVIE = "BUNDLE_NOW_PLAYING_MOVIE";
+    public static final String BUNDLE_MOVIES = "BUNDLE_MOVIES";
+    public static final String BUNDLE_SELECTED_FILTER_POSITION = "BUNDLE_SELECTED_FILTER_POSITION";
+
+
     @BindView(R.id.rv_movies)
     RecyclerView mMoviesRecyclerView;
     MoviesAdapter mMovieAdapter;
 
     @BindView(R.id.rm_now_playing)
-    RatedMovieView mNowPlayingMovie;
+    RatedMovieView mNowPlayingMovieView;
 
     @BindView(R.id.sv_movie_type_filter)
     SegmentView mMovieFilterSegment;
 
     MovieService mMovieService = Networker.shared.movieService;
+
     private Toast mToast;
+    private int mSelectedFilterPosition;
+    private Movie mNowPlayingMovie;
+    private PagingMovies mMovies;
 
     @Override
     public int getLayout() {
@@ -49,57 +58,82 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
 
         mMoviesRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
         mMoviesRecyclerView.setHasFixedSize(true);
-        mMovieFilterSegment.initialize(this, "popular", "most rated", "favorite");
+        mMovieFilterSegment.initialize(this, getString(R.string.most_rated_filter_label), getString(R.string.most_popular_filter_label), getString(R.string.favorite_filter_label));
         mMovieFilterSegment.setActive(1);
+
+        if (savedInstanceState != null) {
+            mMovies = (PagingMovies) savedInstanceState.getSerializable(BUNDLE_MOVIES);
+            mNowPlayingMovie = (Movie) savedInstanceState.getSerializable(BUNDLE_NOW_PLAYING_MOVIE);
+            mSelectedFilterPosition = savedInstanceState.getInt(BUNDLE_SELECTED_FILTER_POSITION);
+            mMovieFilterSegment.setActive(mSelectedFilterPosition);
+        }
+
         loadData();
-
-
     }
 
     private void loadData() {
-        mMovieService.listPopularMovies(null)
-                .enqueue(new RequestCallback<PagingMovies>() {
-                    @Override
-                    public void onComplete() {
-                        super.onComplete();
-                    }
+        if (mMovies != null) {
+            setMovies();
+        } else {
+            mMovieService.listPopularMovies(null)
+                    .enqueue(new RequestCallback<PagingMovies>() {
+                        @Override
+                        public void onComplete() {
+                            super.onComplete();
+                        }
 
-                    @Override
-                    public void onSuccess(Response<PagingMovies> response, PagingMovies result) {
-                        super.onSuccess(response, result);
-                        mMovieAdapter = new MoviesAdapter(MainActivity.this, result);
-                        mMoviesRecyclerView.setAdapter(mMovieAdapter);
-                        mMovieAdapter.notifyDataSetChanged();
-                    }
+                        @Override
+                        public void onSuccess(Response<PagingMovies> response, PagingMovies result) {
+                            super.onSuccess(response, result);
+                            mMovies = result;
+                            setMovies();
+                        }
 
-                    @Override
-                    public void onError(Throwable t) {
-                        super.onError(t);
-                        showError(t.getMessage());
-                    }
-                });
+                        @Override
+                        public void onError(Throwable t) {
+                            super.onError(t);
+                            showError(t.getMessage());
+                        }
+                    });
+        }
 
-        mMovieService.listPlayingMovies(null).enqueue(new RequestCallback<MoviePlayingList>() {
-            @Override
-            public void onComplete() {
-                super.onComplete();
-            }
+        if (mNowPlayingMovie != null) {
+            setNowPlayingMovie();
+        } else {
+            mMovieService.listPlayingMovies(null).enqueue(new RequestCallback<MoviePlayingList>() {
+                @Override
+                public void onComplete() {
+                    super.onComplete();
+                }
 
-            @Override
-            public void onSuccess(Response<MoviePlayingList> response, MoviePlayingList result) {
-                super.onSuccess(response, result);
-                int movieIndex = new Random().nextInt(result.results.size());
+                @Override
+                public void onSuccess(Response<MoviePlayingList> response, MoviePlayingList result) {
+                    super.onSuccess(response, result);
+                    int movieIndex = new Random().nextInt(result.results.size());
 
-                Movie nowPlayingMovie = result.results.get(movieIndex);
-                mNowPlayingMovie.initialize(nowPlayingMovie.title, GenreUtils.shared.getGenres(nowPlayingMovie.genreIds, 2), nowPlayingMovie.posterPath, nowPlayingMovie.voteAverage);
-            }
+                    mNowPlayingMovie = result.results.get(movieIndex);
+                    setNowPlayingMovie();
+                }
 
-            @Override
-            public void onError(Throwable t) {
-                super.onError(t);
-                showError(t.getMessage());
-            }
-        });
+                @Override
+                public void onError(Throwable t) {
+                    super.onError(t);
+                    showError(t.getMessage());
+                }
+            });
+        }
+    }
+
+
+    private void setNowPlayingMovie() {
+        mNowPlayingMovieView.initialize(mNowPlayingMovie.title, GenreUtils.shared.getGenres(mNowPlayingMovie.genreIds, 2),
+                mNowPlayingMovie.posterPath, mNowPlayingMovie.voteAverage);
+    }
+
+    private void setMovies() {
+
+        mMovieAdapter = new MoviesAdapter(this, mMovies);
+        mMoviesRecyclerView.setAdapter(mMovieAdapter);
     }
 
     @Override
@@ -124,8 +158,17 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+
+        outState.putSerializable(BUNDLE_NOW_PLAYING_MOVIE, mNowPlayingMovie);
+        outState.putSerializable(BUNDLE_MOVIES, mMovies);
+        outState.putInt(BUNDLE_SELECTED_FILTER_POSITION, mSelectedFilterPosition);
+    }
+
     private void showError(String message) {
-        if(mToast == null) {
+        if (mToast == null) {
             mToast = new Toast(this);
             mToast.setDuration(Toast.LENGTH_LONG);
         } else {
@@ -139,6 +182,6 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
 
     @Override
     public void onSelected(int position) {
-        int a = 0;
+        mSelectedFilterPosition = position;
     }
 }

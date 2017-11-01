@@ -7,7 +7,7 @@
     <color name="colorAccentLight">#ff7961</color>
     <color name="colorAccentDark">#ba000d</color>
     <color name="colorAccentHalf">#c6ba000d</color>
-    <color name="colorPrimaryHalf">#7d484848</color>
+    <color name="colorPrimaryHalf">#cf000000</color>
 
     <color name="colorTransparent">@android:color/transparent</color>
 

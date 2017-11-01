@@ -51,7 +51,6 @@ public class RatedMovieView extends CustomView {
     }
 
     public void initialize(final String name, final String genre, String posterPath, final float rating) {
-
         mPosterImageLoader.setListener(new ImageLoader.ImageLoaderEvent() {
             @Override
             public void onComplete() {

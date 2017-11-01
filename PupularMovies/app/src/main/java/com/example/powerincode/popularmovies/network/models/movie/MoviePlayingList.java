@@ -2,10 +2,11 @@ package com.example.powerincode.popularmovies.network.models.movie;
 
 import java.util.List;
 
+import com.example.powerincode.popularmovies.network.models.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MoviePlayingList {
+public class MoviePlayingList extends BaseModel {
 
     @SerializedName("results")
     @Expose
