@@ -5,6 +5,17 @@ import android.graphics.Matrix;
 import android.util.AttributeSet;
 
 public class ImageViewPoster extends android.support.v7.widget.AppCompatImageView {
+    public void setOffsetX(int offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public void setOffsetY(int offsetY) {
+        this.offsetY = offsetY;
+    }
+
+    private int offsetX;
+    private int offsetY;
+
     public ImageViewPoster(Context context) {
         super(context);
     }
@@ -41,7 +52,7 @@ public class ImageViewPoster extends android.support.v7.widget.AppCompatImageVie
         if (getScaleType() == ScaleType.MATRIX) {
             Matrix matrix = getImageMatrix();
             float scaleFactor = getWidth() / (float) getDrawable().getIntrinsicWidth();
-            matrix.setScale(scaleFactor, scaleFactor, 0, 0);
+            matrix.setScale(scaleFactor, scaleFactor, offsetX, offsetY);
             setImageMatrix(matrix);
         }
     }

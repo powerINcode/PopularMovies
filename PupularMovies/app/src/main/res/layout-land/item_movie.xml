@@ -1,31 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="@dimen/item_movie_width"
-    android:layout_height="@dimen/item_movie_height"
-    android:background="@color/colorTransparent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
     <com.example.powerincode.popularmovies.common.views.ImageLoader
         android:id="@+id/iv_movie_poster"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/item_movie_padding_horizontal"
-        android:layout_marginEnd="@dimen/item_movie_padding_horizontal"
-        app:layout_goneMarginBottom="@dimen/item_movie_padding_vertical"
-        android:background="@color/colorTransparent"
-        app:layout_constraintBottom_toTopOf="@+id/v_name_container"
+        android:layout_height="200dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_goneMarginBottom="@dimen/item_movie_padding_vertical"
+        app:offset_y="80"
+        app:scale="top" />
 
     <View
         android:id="@+id/v_name_container"
         android:layout_width="0dp"
-        android:layout_height="@dimen/item_movie_name_container_height"
+        android:layout_height="30dp"
         android:layout_gravity="bottom"
-        android:background="@color/colorTransparent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@color/colorPrimaryHalf"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_movie_poster"
         app:layout_constraintEnd_toEndOf="@+id/iv_movie_poster"
         app:layout_constraintStart_toStartOf="@+id/iv_movie_poster" />
 
@@ -33,16 +32,17 @@
         android:id="@+id/tv_movie_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="1"
         android:textAlignment="center"
         android:textColor="@color/primary_text"
-        android:textSize="@dimen/item_movie_name_size"
+        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/v_name_container"
         app:layout_constraintEnd_toEndOf="@+id/v_name_container"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/v_name_container"
-        app:layout_constraintTop_toBottomOf="@+id/v_name_container" />
+        app:layout_constraintTop_toBottomOf="parent"
+        tools:text="Back to the future" />
 
 </android.support.constraint.ConstraintLayout>

@@ -93,5 +93,8 @@ public class ImageLoader extends CustomView {
         } else if(scale == 2) {
             mImageView.setScaleType(ImageView.ScaleType.MATRIX);
         }
+
+        mImageView.setOffsetY(attrs.getInteger(R.styleable.ImageLoader_offset_y, 0));
+        mImageView.setOffsetX(attrs.getInteger(R.styleable.ImageLoader_offset_x, 0));
     }
 }

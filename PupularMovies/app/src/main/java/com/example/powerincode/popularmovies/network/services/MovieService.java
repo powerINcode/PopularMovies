@@ -16,6 +16,9 @@ public interface MovieService {
     @GET("movie/popular")
     Call<PagingMovies> listPopularMovies(@Query("page") Integer page);
 
+    @GET("movie/top_rated")
+    Call<PagingMovies> listTopRated(@Query("page") Integer page);
+
     @GET("movie/now_playing")
     Call<MoviePlayingList> listPlayingMovies(@Query("page") Integer page);
 }

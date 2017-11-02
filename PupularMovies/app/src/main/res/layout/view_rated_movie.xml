@@ -17,15 +17,16 @@
         app:layout_constraintVertical_bias="1.0"
         app:scale="top"/>
 
-    <FrameLayout
+    <View
         android:id="@+id/v_movie_description_container"
         android:layout_width="0dp"
-        android:layout_height="75dp"
+        android:layout_height="@dimen/view_rating_size"
         android:background="@color/colorPrimaryHalf"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/il_rated_movie_poster"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/il_rated_movie_poster" />
 
     <TextView
         android:id="@+id/tv_movie_name"
@@ -37,6 +38,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tv_movie_genre"
         app:layout_constraintEnd_toEndOf="@+id/rtv_rating"
         app:layout_constraintStart_toStartOf="@+id/tv_movie_genre"
+        app:layout_constraintTop_toTopOf="@+id/v_movie_description_container"
         tools:text="Matrix" />
 
     <TextView

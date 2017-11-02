@@ -6,5 +6,8 @@
             <flag name="center" value="1"/>
             <flag name="top" value="2"/>
         </attr>
+
+        <attr name="offset_x" format="integer"/>
+        <attr name="offset_y" format="integer"/>
     </declare-styleable>
 </resources>

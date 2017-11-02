@@ -1,8 +1,12 @@
 <resources>
-    <dimen name="item_movie_width">213dp</dimen>
-    <dimen name="item_movie_height">320dp</dimen>
+    <dimen name="activity_main_playing_movie_height">300dp</dimen>
+
+    <dimen name="item_movie_width">180dp</dimen>
+    <dimen name="item_movie_height">120dp</dimen>
     <dimen name="item_movie_padding_horizontal">18dp</dimen>
     <dimen name="item_movie_padding_vertical">15dp</dimen>
     <dimen name="item_movie_name_size">18sp</dimen>
     <dimen name="item_movie_name_container_height">50dp</dimen>
+
+    <dimen name="view_rating_size">200dp</dimen>
 </resources>
