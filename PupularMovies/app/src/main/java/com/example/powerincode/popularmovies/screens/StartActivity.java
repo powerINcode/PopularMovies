@@ -2,6 +2,7 @@ package com.example.powerincode.popularmovies.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
@@ -29,7 +30,9 @@ public class StartActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mLoadingImageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotate));
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        animation.setRepeatCount(Animation.INFINITE);
+        mLoadingImageView.startAnimation(animation);
 
         Networker.shared.genreService.listGenres().enqueue(new RequestCallback<GenreList>() {
             @Override
