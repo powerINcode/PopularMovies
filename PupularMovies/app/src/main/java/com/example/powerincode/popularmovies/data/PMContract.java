@@ -3,8 +3,6 @@ package com.example.powerincode.popularmovies.data;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import java.net.URI;
-
 /**
  * Created by powerman23rus on 02.11.17.
  * Enjoy ;)

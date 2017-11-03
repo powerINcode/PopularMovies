@@ -58,7 +58,7 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
     @BindView(R.id.sv_movie_type_filter)
     SegmentView mMovieFilterSegment;
 
-    MovieService mMovieService = Networker.shared.movieService;
+    final MovieService mMovieService = Networker.shared.movieService;
 
     private Movie mNowPlayingMovie;
 
@@ -269,7 +269,7 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
     }
 
     private void loadMovies(int segmentPosition) {
-        Call<PagingMovies> call = null;
+        Call<PagingMovies> call;
         int segment;
 
         if (segmentPosition == SEGMENT_TOP_RATED) {

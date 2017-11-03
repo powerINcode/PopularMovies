@@ -21,8 +21,6 @@
         <item name="actionBarStyle">@style/AppTheme.ActionBarEmpty</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="RatingStarStyle">
@@ -31,6 +29,7 @@
         <item name="android:layout_marginEnd">@dimen/view_rating_horizontal_margin</item>
         <item name="android:src">@drawable/ic_star</item>
         <item name="android:layout_weight">1</item>
+        <item name="android:contentDescription">@string/rating_star_description</item>
     </style>
 
     <style name="SegmentButtonStyle">

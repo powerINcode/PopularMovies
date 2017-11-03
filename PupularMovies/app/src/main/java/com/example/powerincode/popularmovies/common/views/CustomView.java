@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.example.powerincode.popularmovies.R;
-
 import butterknife.ButterKnife;
 
 /**

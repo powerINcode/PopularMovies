@@ -9,7 +9,6 @@ import com.example.powerincode.popularmovies.network.models.genre.Genre;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,7 +78,7 @@ public class Movie extends BaseModel implements Parcelable {
         originalLanguage = in.readString();
         originalTitle = in.readString();
         if (in.readByte() == 0x01) {
-            genreIds = new ArrayList<Integer>();
+            genreIds = new ArrayList<>();
             in.readList(genreIds, Integer.class.getClassLoader());
         } else {
             genreIds = null;

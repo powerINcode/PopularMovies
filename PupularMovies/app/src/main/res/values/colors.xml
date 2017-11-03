@@ -2,15 +2,11 @@
 <resources>
     <color name="colorPrimary">#212121</color>
     <color name="colorPrimaryDark">#000000</color>
-    <color name="colorPrimaryLight">#484848</color>
     <color name="colorAccent">#f44336</color>
-    <color name="colorAccentLight">#ff7961</color>
     <color name="colorAccentDark">#ba000d</color>
-    <color name="colorAccentHalf">#c6ba000d</color>
     <color name="colorPrimaryHalf">#cf000000</color>
 
     <color name="colorTransparent">@android:color/transparent</color>
 
     <color name="primary_text">#ffffff</color>
-    <color name="secondary_text">#000000</color>
 </resources>

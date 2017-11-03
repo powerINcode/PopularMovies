@@ -6,7 +6,7 @@ package com.example.powerincode.popularmovies.utils;
  */
 
 public class Configuration {
-    public static String API_DOMAIN_URL = "https://api.themoviedb.org/3/";
-    public static String DOMAIN_URL = "http://image.tmdb.org/t/p/";
-    public static String API_KEY = "b391ea8520581a230bf851b2a23312b0";
+    public static final String API_DOMAIN_URL = "https://api.themoviedb.org/3/";
+    public static final String DOMAIN_URL = "http://image.tmdb.org/t/p/";
+    public static final String API_KEY = "Insert yor API key here :)";
 }

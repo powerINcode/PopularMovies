@@ -15,28 +15,28 @@ import com.google.gson.annotations.SerializedName;
 public class Video extends BaseModel implements Parcelable {
     @SerializedName("id")
     @Expose
-    public String id;
+    public final String id;
     @SerializedName("iso_639_1")
     @Expose
-    public String iso6391;
+    public final String iso6391;
     @SerializedName("iso_3166_1")
     @Expose
-    public String iso31661;
+    public final String iso31661;
     @SerializedName("key")
     @Expose
-    public String key;
+    public final String key;
     @SerializedName("name")
     @Expose
-    public String name;
+    public final String name;
     @SerializedName("site")
     @Expose
-    public String site;
+    public final String site;
     @SerializedName("size")
     @Expose
-    public Integer size;
+    public final Integer size;
     @SerializedName("type")
     @Expose
-    public String type;
+    public final String type;
 
     protected Video(Parcel in) {
         id = in.readString();

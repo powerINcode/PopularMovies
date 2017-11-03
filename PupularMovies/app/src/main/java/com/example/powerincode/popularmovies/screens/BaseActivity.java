@@ -3,10 +3,7 @@ package com.example.powerincode.popularmovies.screens;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
-
-import com.example.powerincode.popularmovies.R;
 
 import butterknife.ButterKnife;
 

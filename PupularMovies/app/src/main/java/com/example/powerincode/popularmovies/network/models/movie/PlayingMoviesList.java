@@ -10,7 +10,7 @@ public class PlayingMoviesList extends BaseModel {
 
     @SerializedName("results")
     @Expose
-    public List<Movie> results = null;
+    public final List<Movie> results = null;
     @SerializedName("page")
     @Expose
     public Integer page;

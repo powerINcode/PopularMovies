@@ -10,16 +10,16 @@ import com.google.gson.annotations.SerializedName;
 public class Review extends BaseModel implements Parcelable {
     @SerializedName("id")
     @Expose
-    public String id;
+    public final String id;
     @SerializedName("author")
     @Expose
-    public String author;
+    public final String author;
     @SerializedName("content")
     @Expose
-    public String content;
+    public final String content;
     @SerializedName("url")
     @Expose
-    public String url;
+    public final String url;
 
     protected Review(Parcel in) {
         id = in.readString();

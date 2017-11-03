@@ -22,7 +22,7 @@ import butterknife.BindView;
 
 public class ReviewsAdapter extends RecyclerView.Adapter<ReviewsAdapter.ReviewViewHolder> {
     private final Context mContext;
-    private ArrayList<Review> mReviews;
+    private final ArrayList<Review> mReviews;
 
     public ReviewsAdapter(Context context, ArrayList<Review> reviews) {
         mContext = context;

@@ -79,7 +79,7 @@ public class MovieDetailActivity extends BaseActivity implements TrailersAdapter
 
     ReviewsAdapter mReviewsAdapter;
 
-    private MovieService mMovieService = Networker.shared.movieService;
+    private final MovieService mMovieService = Networker.shared.movieService;
     private ArrayList<Video> mTrailers;
     private ArrayList<Review> mReviews;
     private Movie mMovie;

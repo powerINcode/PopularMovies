@@ -26,7 +26,7 @@ public class PagingMovies extends BaseModel implements Parcelable {
         totalResults = in.readByte() == 0x00 ? null : in.readInt();
         totalPages = in.readByte() == 0x00 ? null : in.readInt();
         if (in.readByte() == 0x01) {
-            results = new ArrayList<Movie>();
+            results = new ArrayList<>();
             in.readList(results, Movie.class.getClassLoader());
         } else {
             results = null;

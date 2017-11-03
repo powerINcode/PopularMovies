@@ -8,5 +8,7 @@
     <string name="item_trailers_description_label">Description</string>
     <string name="item_trailers_reviews_label">Reviews</string>
     <string name="error_unable_to_load_favorite_movies">Unable to load favorite movies</string>
+    <string name="app_is_loading_description">App is loading</string>
+    <string name="rating_star_description">Rating start</string>
 
 </resources>

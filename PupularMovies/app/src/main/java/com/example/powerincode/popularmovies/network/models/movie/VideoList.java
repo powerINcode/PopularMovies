@@ -8,12 +8,11 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class VideoList extends BaseModel implements Parcelable {
     @SerializedName("id")
     @Expose
-    public Integer id;
+    public final Integer id;
     @SerializedName("results")
     @Expose
     public ArrayList<Video> videos = null;
@@ -21,7 +20,7 @@ public class VideoList extends BaseModel implements Parcelable {
     protected VideoList(Parcel in) {
         id = in.readByte() == 0x00 ? null : in.readInt();
         if (in.readByte() == 0x01) {
-            videos = new ArrayList<Video>();
+            videos = new ArrayList<>();
             in.readList(videos, Video.class.getClassLoader());
         } else {
             videos = null;

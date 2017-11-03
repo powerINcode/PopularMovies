@@ -26,7 +26,7 @@ public class TrailersAdapter extends RecyclerView.Adapter<TrailersAdapter.Traile
     }
 
     private final Context mContext;
-    private ArrayList<Video> videos;
+    private final ArrayList<Video> videos;
     private TrailersAdapterEvent mEventListener;
 
     public TrailersAdapter(Context context, ArrayList<Video> videos) {

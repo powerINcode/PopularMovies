@@ -17,25 +17,25 @@ import java.util.ArrayList;
 public class ReviewList extends BaseModel implements Parcelable {
     @SerializedName("id")
     @Expose
-    public Integer id;
+    public final Integer id;
     @SerializedName("page")
     @Expose
-    public Integer page;
+    public final Integer page;
     @SerializedName("results")
     @Expose
     public ArrayList<Review> reviews = null;
     @SerializedName("total_pages")
     @Expose
-    public Integer totalPages;
+    public final Integer totalPages;
     @SerializedName("total_results")
     @Expose
-    public Integer totalResults;
+    public final Integer totalResults;
 
     protected ReviewList(Parcel in) {
         id = in.readByte() == 0x00 ? null : in.readInt();
         page = in.readByte() == 0x00 ? null : in.readInt();
         if (in.readByte() == 0x01) {
-            reviews = new ArrayList<Review>();
+            reviews = new ArrayList<>();
             in.readList(reviews, Review.class.getClassLoader());
         } else {
             reviews = null;

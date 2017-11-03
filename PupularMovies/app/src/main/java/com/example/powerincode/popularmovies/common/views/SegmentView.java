@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.res.ResourcesCompat;
 import android.util.AttributeSet;
-import android.view.ContextThemeWrapper;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +32,7 @@ public class SegmentView extends CustomView implements View.OnTouchListener {
         void onSegmentSelected(int position);
     }
 
-    private ArrayList<Button> mSegments = new ArrayList<>();
+    private final ArrayList<Button> mSegments = new ArrayList<>();
     private Button mSelectedSegment;
 
     public SegmentView(@NonNull Context context) {
@@ -69,7 +68,7 @@ public class SegmentView extends CustomView implements View.OnTouchListener {
             button.setTextAppearance(getContext(), R.style.SegmentButtonStyle);
             button.setText(segment);
 
-            int backgroundId = 0;
+            int backgroundId;
             if (i == 0) {
                backgroundId = R.drawable.segment_left;
             } else if(i == segmentsLabels.length - 1) {

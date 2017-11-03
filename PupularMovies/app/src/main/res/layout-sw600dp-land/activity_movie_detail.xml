@@ -19,7 +19,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:id="@+id/sv_movie_description"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_below="@id/pv_selected_movie"
@@ -133,6 +132,7 @@
         android:onClick="addToFavorite"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_star" />
+        app:srcCompat="@drawable/ic_star"
+        android:focusable="true" />
 
 </android.support.constraint.ConstraintLayout>
