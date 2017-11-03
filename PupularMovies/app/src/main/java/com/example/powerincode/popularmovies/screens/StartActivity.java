@@ -8,6 +8,7 @@ import com.example.powerincode.popularmovies.R;
 import com.example.powerincode.popularmovies.network.Networker;
 import com.example.powerincode.popularmovies.network.models.genre.GenreList;
 import com.example.powerincode.popularmovies.network.services.RequestCallback;
+import com.example.powerincode.popularmovies.screens.main.MainActivity;
 
 import retrofit2.Response;
 

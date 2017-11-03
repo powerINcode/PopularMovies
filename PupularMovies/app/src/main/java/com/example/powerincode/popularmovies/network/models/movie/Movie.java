@@ -3,7 +3,9 @@ package com.example.powerincode.popularmovies.network.models.movie;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.powerincode.popularmovies.PopularMovieApplication;
 import com.example.powerincode.popularmovies.network.models.BaseModel;
+import com.example.powerincode.popularmovies.network.models.genre.Genre;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -22,7 +24,7 @@ public class Movie extends BaseModel implements Parcelable {
     public Integer voteCount;
     @SerializedName("id")
     @Expose
-    public Integer id;
+    public Long id;
     @SerializedName("video")
     @Expose
     public Boolean video;
@@ -59,10 +61,15 @@ public class Movie extends BaseModel implements Parcelable {
     @SerializedName("release_date")
     @Expose
     public String releaseDate;
+    public String genres;
+    public boolean isFavorite;
+
+    public Movie() {
+    }
 
     protected Movie(Parcel in) {
         voteCount = in.readByte() == 0x00 ? null : in.readInt();
-        id = in.readByte() == 0x00 ? null : in.readInt();
+        id = in.readByte() == 0x00 ? null : in.readLong();
         byte videoVal = in.readByte();
         video = videoVal == 0x02 ? null : videoVal != 0x00;
         voteAverage = in.readByte() == 0x00 ? null : in.readFloat();
@@ -82,6 +89,8 @@ public class Movie extends BaseModel implements Parcelable {
         adult = adultVal == 0x02 ? null : adultVal != 0x00;
         overview = in.readString();
         releaseDate = in.readString();
+        genres = in.readString();
+        isFavorite = in.readByte() != 0x00;
     }
 
     @Override
@@ -101,7 +110,7 @@ public class Movie extends BaseModel implements Parcelable {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeInt(id);
+            dest.writeLong(id);
         }
         if (video == null) {
             dest.writeByte((byte) (0x02));
@@ -138,6 +147,8 @@ public class Movie extends BaseModel implements Parcelable {
         }
         dest.writeString(overview);
         dest.writeString(releaseDate);
+        dest.writeString(genres);
+        dest.writeByte((byte) (isFavorite ? 0x01 : 0x00));
     }
 
     @SuppressWarnings("unused")
@@ -152,4 +163,39 @@ public class Movie extends BaseModel implements Parcelable {
             return new Movie[size];
         }
     };
+
+    public String getGenres() {
+        if (genreIds != null) {
+            return getGenres(2);
+        } else {
+            return genres;
+        }
+    }
+
+    private String getGenres(int max) {
+        String result = "";
+
+        int i = 0;
+        for (Integer genreId : genreIds) {
+            for (Genre genre : PopularMovieApplication.sGenres) {
+                if(!genre.id.equals(genreId)) {
+                    continue;
+                }
+
+                i++;
+
+                if (result.isEmpty()) {
+                    result = genre.name;
+                } else {
+                    result += ", " + genre.name;
+                }
+
+                if(i == max) {
+                    return result;
+                }
+            }
+        }
+
+        return result;
+    }
 }

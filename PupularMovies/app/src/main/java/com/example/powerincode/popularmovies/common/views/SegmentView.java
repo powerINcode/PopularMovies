@@ -30,7 +30,7 @@ public class SegmentView extends CustomView implements View.OnTouchListener {
     private SegmentAction mActionListener;
 
     public interface SegmentAction {
-        void onSelected(int position);
+        void onSegmentSelected(int position);
     }
 
     private ArrayList<Button> mSegments = new ArrayList<>();
@@ -61,7 +61,6 @@ public class SegmentView extends CustomView implements View.OnTouchListener {
         mActionListener = actionListener;
         int i = 0;
         for(String segment : segmentsLabels) {
-            ContextThemeWrapper newContext = new ContextThemeWrapper(getContext(), R.style.SegmentButtonStyle);
             final Button button = new Button(getContext());
             this.mSegments.add(button);
             mContainer.addView(button);
@@ -96,7 +95,7 @@ public class SegmentView extends CustomView implements View.OnTouchListener {
             mSelectedSegment = button;
 
             if (mActionListener != null) {
-                mActionListener.onSelected(mSegments.indexOf(button));
+                mActionListener.onSegmentSelected(mSegments.indexOf(button));
             }
         }
     }
@@ -109,9 +108,7 @@ public class SegmentView extends CustomView implements View.OnTouchListener {
             if (motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
                 setActive(mSegments.indexOf(button));
             }
-
-            return true;
         }
-        return false;
+        return true;
     }
 }

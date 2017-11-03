@@ -6,7 +6,7 @@ import com.example.powerincode.popularmovies.network.models.BaseModel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class MoviePlayingList extends BaseModel {
+public class PlayingMoviesList extends BaseModel {
 
     @SerializedName("results")
     @Expose

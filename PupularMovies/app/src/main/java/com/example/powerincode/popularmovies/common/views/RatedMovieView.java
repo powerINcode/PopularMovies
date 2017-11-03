@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.powerincode.popularmovies.R;
+import com.example.powerincode.popularmovies.network.models.movie.Movie;
 import com.example.powerincode.popularmovies.utils.UriHelper;
 
 import butterknife.BindView;
@@ -17,7 +18,11 @@ import butterknife.BindView;
  * Enjoy ;)
  */
 
-public class RatedMovieView extends CustomView {
+public class RatedMovieView extends CustomView implements View.OnClickListener {
+    public interface RatedMovieViewEvent {
+        void onMovieClicked(Movie movie);
+    }
+
     @BindView(R.id.il_rated_movie_poster)
     ImageLoader mPosterImageLoader;
 
@@ -32,6 +37,9 @@ public class RatedMovieView extends CustomView {
 
     @BindView(R.id.tv_movie_genre)
     TextView mMovieGenre;
+
+    private RatedMovieViewEvent mEventListener;
+    private Movie mMovie;
 
     public RatedMovieView(@NonNull Context context) {
         super(context);
@@ -50,23 +58,36 @@ public class RatedMovieView extends CustomView {
         return R.layout.view_rated_movie;
     }
 
-    public void initialize(final String name, final String genre, String posterPath, final float rating) {
+    public void initialize(final Movie movie) {
+        mMovie = movie;
         mPosterImageLoader.setListener(new ImageLoader.ImageLoaderEvent() {
             @Override
             public void onComplete() {
                 mMovieDescriptionContainer.setVisibility(VISIBLE);
 
-                mMovieName.setText(name);
+                mMovieName.setText(movie.title);
                 mMovieName.setVisibility(VISIBLE);
 
-                mMovieGenre.setText(genre);
+                mMovieGenre.setText(movie.getGenres());
                 mMovieGenre.setVisibility(VISIBLE);
 
-                mRatingView.initialize(rating / 2);
+                mRatingView.initialize(movie.voteAverage / 2);
                 mRatingView.setVisibility(VISIBLE);
             }
         });
-        mPosterImageLoader.initialization(UriHelper.shared.buildPosterUrl(getContext(), posterPath, 780));
+        mPosterImageLoader.initialization(UriHelper.shared.buildPosterUrl(getContext(), movie.posterPath, 780));
 
+        setOnClickListener(this);
+    }
+
+    public void setEventListener(RatedMovieViewEvent e) {
+        mEventListener = e;
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (mEventListener != null) {
+            mEventListener.onMovieClicked(mMovie);
+        }
     }
 }

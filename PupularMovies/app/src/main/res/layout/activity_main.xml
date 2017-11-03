@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
-    tools:context="com.example.powerincode.popularmovies.screens.MainActivity">
+    tools:context="com.example.powerincode.popularmovies.screens.main.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.ActionBar"
+        android:theme="@style/AppTheme.NoActionBar"
         android:visibility="gone">
 
         <android.support.v7.widget.Toolbar
@@ -28,7 +28,7 @@
         android:id="@+id/rm_now_playing"
         class="com.example.powerincode.popularmovies.common.views.RatedMovieView"
         android:layout_width="0dp"
-        android:layout_height="@dimen/activity_main_playing_movie_height"
+        android:layout_height="@dimen/movie_poster_big_height"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

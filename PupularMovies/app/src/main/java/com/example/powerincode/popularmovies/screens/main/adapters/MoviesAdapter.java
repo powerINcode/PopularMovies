@@ -1,4 +1,4 @@
-package com.example.powerincode.popularmovies.screens.adapters;
+package com.example.powerincode.popularmovies.screens.main.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -22,8 +22,13 @@ import butterknife.BindView;
  */
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
+    public interface MovieAdapterEvent {
+        void onMovieClicked(Movie movie);
+    }
+
     private final Context mContext;
     private PagingMovies mPagingMovies;
+    private MovieAdapterEvent mEventListener;
 
     public MoviesAdapter(Context context, PagingMovies mPagingMovies) {
         this.mPagingMovies = mPagingMovies;
@@ -42,12 +47,20 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         Movie movie = mPagingMovies.results.get(position);
-        holder.bind(movie.posterPath, movie.originalTitle);
+        holder.bind(movie);
     }
 
     @Override
     public int getItemCount() {
+        if (mPagingMovies == null || mPagingMovies.results == null) {
+            return 0;
+        }
+
         return mPagingMovies.results.size();
+    }
+
+    public void setEventListener(MovieAdapterEvent e) {
+        mEventListener = e;
     }
 
     class MovieViewHolder extends BaseViewHolder {
@@ -58,13 +71,24 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
         @BindView(R.id.tv_movie_name)
         TextView mMovieNameTextView;
 
+        private Movie mMovie;
+
         public MovieViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (mEventListener != null) {
+                        mEventListener.onMovieClicked(mMovie);
+                    }
+                }
+            });
         }
 
-        public void bind(String posterPath, String movieName) {
-            mMovieNameTextView.setText(movieName);
-            mPosterImageLoader.initialization(UriHelper.shared.buildPosterUrl(mContext, posterPath));
+        public void bind(Movie movie) {
+            mMovie = movie;
+            mMovieNameTextView.setText(movie.title);
+            mPosterImageLoader.initialization(UriHelper.shared.buildPosterUrl(mContext, movie.posterPath));
         }
     }
 }

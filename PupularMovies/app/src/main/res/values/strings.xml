@@ -3,5 +3,10 @@
     <string name="top_rated_filter_label">top rated</string>
     <string name="most_popular_filter_label">popular</string>
     <string name="favorite_filter_label">favorite</string>
+    <string name="item_trailers_videos_label">Videos</string>
+    <string name="item_trailers_empty_label">Empty</string>
+    <string name="item_trailers_description_label">Description</string>
+    <string name="item_trailers_reviews_label">Reviews</string>
+    <string name="error_unable_to_load_favorite_movies">Unable to load favorite movies</string>
 
 </resources>

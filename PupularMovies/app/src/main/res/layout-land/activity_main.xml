@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/colorPrimary"
-    tools:context="com.example.powerincode.popularmovies.screens.MainActivity">
+    tools:context="com.example.powerincode.popularmovies.screens.main.MainActivity">
 
     <view
         android:id="@+id/rm_now_playing"
