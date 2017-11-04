@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/image"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.powerincode.popularmovies.screens.main.MainActivity">
@@ -38,7 +37,7 @@
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/sv_movie_type_filter"
-        app:layout_constraintStart_toStartOf="@+id/sv_movie_type_filter"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toBottomOf="@+id/sv_movie_type_filter" />
 
     <android.support.constraint.Guideline

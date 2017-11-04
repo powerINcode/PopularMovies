@@ -25,13 +25,15 @@ public class PMContract {
         public static final int TABLE_COLUMN_GENRES_INDEX = 3;
         public static final int TABLE_COLUMN_VOTES_INDEX = 4;
         public static final int TABLE_COLUMN_DESCRIPTION_INDEX = 5;
-        public static final int TABLE_COLUMN_ADD_DATE_INDEX = 6;
+        public static final int TABLE_COLUMN_RELEASE_DATE_INDEX = 6;
+        public static final int TABLE_COLUMN_ADD_DATE_INDEX = 7;
 
         public static final String TABLE_COLUMN_TITLE = "title";
         public static final String TABLE_COLUMN_POSTER_PATH = "poster_path";
         public static final String TABLE_COLUMN_GENRES = "genres";
         public static final String TABLE_COLUMN_VOTES = "votes";
         public static final String TABLE_COLUMN_DESCRIPTION = "description";
+        public static final String TABLE_COLUMN_RELEASE_DATE = "release_date";
         public static final String TABLE_COLUMN_ADD_DATE = "add_date";
     }
 }

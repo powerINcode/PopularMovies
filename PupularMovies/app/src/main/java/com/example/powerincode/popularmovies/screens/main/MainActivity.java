@@ -6,11 +6,12 @@ import android.content.AsyncTaskLoader;
 import android.content.Loader;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.powerincode.popularmovies.R;
 import com.example.powerincode.popularmovies.common.views.RatedMovieView;
@@ -37,10 +38,11 @@ import retrofit2.Response;
 public class MainActivity extends BaseActivity implements SegmentView.SegmentAction,
         MoviesAdapter.MovieAdapterEvent,
         RatedMovieView.RatedMovieViewEvent,
-        LoaderManager.LoaderCallbacks<Cursor>{
+        LoaderManager.LoaderCallbacks<Cursor> {
     public static final String BUNDLE_NOW_PLAYING_MOVIE = "BUNDLE_NOW_PLAYING_MOVIE";
     public static final String BUNDLE_SEGMENTED_MOVIES = "BUNDLE_SEGMENTED_MOVIES";
     public static final String BUNDLE_SEGMENT_POSITION = "BUNDLE_SEGMENT_POSITION";
+    public static final String BUNDLE_MOVIES_SCROLL_POSITION = "BUNDLE_MOVIES_SCROLL_POSITION";
 
     public static final int SEGMENT_TOP_RATED = 0;
     public static final int SEGMENT_POPULAR = 1;
@@ -65,6 +67,9 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
     private HashMap<Integer, PagingMovies> mSegmentMovies;
     private int mSelectedFilterPosition = 1;
 
+    private int mScrollPosition = 0;
+    private boolean mIsMovieWasTapped;
+
     @Override
     public int getLayout() {
         return R.layout.activity_main;
@@ -75,37 +80,37 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
         super.onResume();
 
         mMovieFilterSegment.setActive(mSelectedFilterPosition);
-        loadMovies(2);
+        loadMovies(SEGMENT_FAVORITE);
+
+        setScrollPosition();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        if (!mIsMovieWasTapped) {
+            mScrollPosition = ((GridLayoutManager) mMoviesRecyclerView.getLayoutManager()).findFirstVisibleItemPosition();
+        }
 
         mMovieFilterSegment.setActive(mSelectedFilterPosition);
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getLoaderManager().initLoader(LOADER_MAIN, null, this);
 
-        if (getResources().getBoolean(R.bool.is_landscape_mode)) {
-            mMoviesRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        } else {
-            mMoviesRecyclerView.setLayoutManager(new GridLayoutManager(this, 3));
-        }
+        mMoviesRecyclerView.setLayoutManager(new GridLayoutManager(this, getResources().getInteger(R.integer.span_count)));
 
         mNowPlayingMovieView.setEventListener(this);
         mMoviesRecyclerView.setHasFixedSize(true);
         mMovieFilterSegment.initialize(this, getString(R.string.top_rated_filter_label), getString(R.string.most_popular_filter_label), getString(R.string.favorite_filter_label));
 
         if (savedInstanceState != null) {
+            mScrollPosition =  savedInstanceState.getInt(BUNDLE_MOVIES_SCROLL_POSITION, 0);
             mSelectedFilterPosition = savedInstanceState.getInt(BUNDLE_SEGMENT_POSITION);
             mSegmentMovies = (HashMap<Integer, PagingMovies>) savedInstanceState.getSerializable(BUNDLE_SEGMENTED_MOVIES);
             mNowPlayingMovie = (Movie) savedInstanceState.getSerializable(BUNDLE_NOW_PLAYING_MOVIE);
-
         }
     }
 
@@ -135,6 +140,8 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
+        outState.putInt(BUNDLE_MOVIES_SCROLL_POSITION, mScrollPosition);
+
         outState.putInt(BUNDLE_SEGMENT_POSITION, mSelectedFilterPosition);
         outState.putSerializable(BUNDLE_NOW_PLAYING_MOVIE, mNowPlayingMovie);
         outState.putSerializable(BUNDLE_SEGMENTED_MOVIES, mSegmentMovies);
@@ -151,8 +158,12 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
         goToDetailsActivity(movie);
     }
 
-    private void goToDetailsActivity(Movie movie) {
-        startActivity(MovieDetailActivity.getActivity(this, movie));
+    @Override
+    public void onMovieClicked(View view, Movie movie) {
+        mIsMovieWasTapped = true;
+        mScrollPosition = mMoviesRecyclerView.getLayoutManager().getPosition(view);
+
+        goToDetailsActivity(movie);
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -182,7 +193,7 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
                             null,
                             null,
                             null);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     return null;
                 }
             }
@@ -208,6 +219,7 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
                     movie.genres = cursor.getString(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_GENRES_INDEX);
                     movie.voteAverage = cursor.getFloat(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_VOTES_INDEX);
                     movie.overview = cursor.getString(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_DESCRIPTION_INDEX);
+                    movie.releaseDate = cursor.getString(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_RELEASE_DATE_INDEX);
                     movie.posterPath = cursor.getString(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_POSTER_PATH_INDEX);
                     movie.isFavorite = true;
 
@@ -232,6 +244,18 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    private void goToDetailsActivity(Movie movie) {
+        startActivity(MovieDetailActivity.getActivity(this, movie));
+    }
+    private void setScrollPosition() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mMoviesRecyclerView.scrollToPosition(mScrollPosition);
+            }
+        }, 100);
     }
 
     private void loadData() {
@@ -278,10 +302,10 @@ public class MainActivity extends BaseActivity implements SegmentView.SegmentAct
         } else if (segmentPosition == SEGMENT_POPULAR) {
             call = mMovieService.listPopularMovies(null);
             segment = SEGMENT_POPULAR;
-        } else if (segmentPosition == 2){
+        } else if (segmentPosition == 2) {
             Bundle bundle = new Bundle();
 
-            if(getLoaderManager().getLoader(LOADER_MAIN) == null) {
+            if (getLoaderManager().getLoader(LOADER_MAIN) == null) {
                 getLoaderManager().initLoader(LOADER_MAIN, bundle, this);
             } else {
                 getLoaderManager().restartLoader(LOADER_MAIN, bundle, this);

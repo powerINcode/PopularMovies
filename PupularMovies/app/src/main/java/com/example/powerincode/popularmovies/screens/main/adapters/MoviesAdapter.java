@@ -23,7 +23,7 @@ import butterknife.BindView;
 
 public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewHolder> {
     public interface MovieAdapterEvent {
-        void onMovieClicked(Movie movie);
+        void onMovieClicked(View view, Movie movie);
     }
 
     private final Context mContext;
@@ -73,13 +73,13 @@ public class MoviesAdapter extends RecyclerView.Adapter<MoviesAdapter.MovieViewH
 
         private Movie mMovie;
 
-        public MovieViewHolder(View itemView) {
+        public MovieViewHolder(final View itemView) {
             super(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     if (mEventListener != null) {
-                        mEventListener.onMovieClicked(mMovie);
+                        mEventListener.onMovieClicked(itemView, mMovie);
                     }
                 }
             });

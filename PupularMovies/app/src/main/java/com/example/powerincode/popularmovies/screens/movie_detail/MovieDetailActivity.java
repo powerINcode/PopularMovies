@@ -58,6 +58,12 @@ public class MovieDetailActivity extends BaseActivity implements TrailersAdapter
     @BindView(R.id.pv_selected_movie)
     RatedMovieView mSelectedMovieView;
 
+    @BindView(R.id.tv_movie_vote)
+    TextView mMovieVotesTextView;
+
+    @BindView(R.id.tv_movie_release_date)
+    TextView mMovieReleaseDateTextView;
+
     @BindView(R.id.tv_movie_description)
     TextView mMovieDescriptionTextView;
 
@@ -113,6 +119,8 @@ public class MovieDetailActivity extends BaseActivity implements TrailersAdapter
             mMovie = getIntent().getParcelableExtra(EXTRA_MOVIE);
 
             mSelectedMovieView.initialize(mMovie);
+            mMovieVotesTextView.setText(String.valueOf(mMovie.voteAverage));
+            mMovieReleaseDateTextView.setText(mMovie.releaseDate.substring(0, 4));
             mMovieDescriptionTextView.setText(mMovie.overview);
         }
 
@@ -205,6 +213,7 @@ public class MovieDetailActivity extends BaseActivity implements TrailersAdapter
             cv.put(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_GENRES, mMovie.getGenres());
             cv.put(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_VOTES, mMovie.voteAverage);
             cv.put(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_DESCRIPTION, mMovie.overview);
+            cv.put(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_RELEASE_DATE, mMovie.releaseDate);
             cv.put(PMContract.FavoriteMoviesEntry.TABLE_COLUMN_ADD_DATE, new Date().getTime());
 
             Uri result = contentResolver.insert(PMContract.FavoriteMoviesEntry.CONTENT_URI, cv);

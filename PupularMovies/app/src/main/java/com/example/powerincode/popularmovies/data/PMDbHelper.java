@@ -29,6 +29,7 @@ public class PMDbHelper extends SQLiteOpenHelper {
                 FavoriteMoviesEntry.TABLE_COLUMN_GENRES + " TEXT NOT NULL," +
                 FavoriteMoviesEntry.TABLE_COLUMN_VOTES + " REAL NOT NULL," +
                 FavoriteMoviesEntry.TABLE_COLUMN_DESCRIPTION + " TEXT NOT NULL," +
+                FavoriteMoviesEntry.TABLE_COLUMN_RELEASE_DATE + " TEXT NOT NULL," +
                 FavoriteMoviesEntry.TABLE_COLUMN_ADD_DATE + " NUMERIC NOT NULL);";
 
         sqLiteDatabase.execSQL(CREATE_DB_QUERY);

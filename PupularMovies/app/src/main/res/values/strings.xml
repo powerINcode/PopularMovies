@@ -10,5 +10,7 @@
     <string name="error_unable_to_load_favorite_movies">Unable to load favorite movies</string>
     <string name="app_is_loading_description">App is loading</string>
     <string name="rating_star_description">Rating start</string>
+    <string name="item_trailers_release_date_label">Release date</string>
+    <string name="item_trailers_votes_label">Votes</string>
 
 </resources>

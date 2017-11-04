@@ -1,8 +1,8 @@
 <resources>
     <dimen name="movie_poster_big_height">450dp</dimen>
 
-    <dimen name="item_movie_width">280dp</dimen>
-    <dimen name="item_movie_height">420dp</dimen>
+    <dimen name="item_movie_width">250dp</dimen>
+    <dimen name="item_movie_height">375dp</dimen>
     <dimen name="item_movie_padding_horizontal">8dp</dimen>
     <dimen name="item_movie_padding_vertical">0dp</dimen>
     <dimen name="item_movie_name_size">14sp</dimen>
